@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bluw50hwte2ia"]
+
+[ext_resource type="Script" uid="uid://b6rt5x1p2awnd" path="res://godot_ap/hint_button.gd" id="1_gblcw"]
+
+[node name="HintButton" type="MarginContainer" unique_id=1134856857]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_gblcw")
+
+[node name="Panel" type="Panel" parent="." unique_id=401279063]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel" unique_id=204405499]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="Spacer" type="Control" parent="Panel/GridContainer" unique_id=414256854]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer2" type="Control" parent="Panel/GridContainer" unique_id=1855271502]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer3" type="Control" parent="Panel/GridContainer" unique_id=1820039424]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer4" type="Control" parent="Panel/GridContainer" unique_id=32956753]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/GridContainer" unique_id=454893336]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/GridContainer/MarginContainer" unique_id=780357319]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/GridContainer/MarginContainer/VBoxContainer" unique_id=91649761]
+layout_mode = 2
+text = "Press the button"
+horizontal_alignment = 1
+
+[node name="TheHintButton" type="Button" parent="Panel/GridContainer/MarginContainer/VBoxContainer" unique_id=944561009]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hint"
+
+[node name="Output" type="Label" parent="Panel/GridContainer/MarginContainer/VBoxContainer" unique_id=491153864]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Spacer5" type="Control" parent="Panel/GridContainer" unique_id=1641910725]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer6" type="Control" parent="Panel/GridContainer" unique_id=1753509153]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer7" type="Control" parent="Panel/GridContainer" unique_id=872173788]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer8" type="Control" parent="Panel/GridContainer" unique_id=684621197]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

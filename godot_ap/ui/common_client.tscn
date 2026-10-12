@@ -1,11 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn7ah7d3ep4de"]
+[gd_scene format=3 uid="uid://cn7ah7d3ep4de"]
 
 [ext_resource type="PackedScene" uid="uid://cgq7n1figlpu3" path="res://godot_ap/ui/base_client.tscn" id="1_i5jgm"]
+[ext_resource type="PackedScene" uid="uid://bluw50hwte2ia" path="res://godot_ap/hint_button.tscn" id="2_kwywh"]
 [ext_resource type="PackedScene" uid="uid://dp2yir3r1061y" path="res://godot_ap/ui/settings_tab.tscn" id="3_4k5ff"]
 
-[node name="CommonClient" instance=ExtResource("1_i5jgm")]
+[node name="CommonClient" unique_id=1408333196 instance=ExtResource("1_i5jgm")]
 
-[node name="Settings" parent="Tabs" index="3" instance=ExtResource("3_4k5ff")]
+[node name="Tabs" parent="." index="0"]
+current_tab = 1
+
+[node name="HintButton" parent="Tabs" index="1" unique_id=1134856857 instance=ExtResource("2_kwywh")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Console" parent="Tabs" index="2"]
+metadata/_tab_index = 1
+
+[node name="Hints" parent="Tabs" index="3"]
 metadata/_tab_index = 2
+
+[node name="Settings" parent="Tabs" index="4" unique_id=279292113 instance=ExtResource("3_4k5ff")]
+visible = false
+layout_mode = 2
