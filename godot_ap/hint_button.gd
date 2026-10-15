@@ -10,7 +10,7 @@ func _ready():
 
 	#Archipelago.load_console(self, false)
 	load_connection()
-	#Archipelago.connected.connect(on_connect)
+	Archipelago.connected.connect(on_connect)
 	#Archipelago.disconnected.connect(on_disconnect)
 	#Archipelago.connectionrefused.connect(on_connect_reject)
 	#Archipelago.printjson.connect(on_printjson)
@@ -19,12 +19,14 @@ func _ready():
 
 var _prog_locs: Array[NetworkItem] = []
 var _non_prog_locs: Array[NetworkItem] = []
+
 func refresh_hint_count() -> void:
+	#print("Refreshed locs")
 	if Archipelago.is_not_connected():
 		return
 	_prog_locs.clear()
 	_non_prog_locs.clear()
-
+	
 	var locs := Archipelago.conn._scout_cache.keys()
 	for hint in Archipelago.conn.hints:
 		locs.erase(hint.item.loc_id)
@@ -38,8 +40,10 @@ func refresh_hint_count() -> void:
 		if itm.is_prog():
 			_prog_locs.append(itm)
 		else: _non_prog_locs.append(itm)
+	print(_prog_locs)
 
 func grant_hint() -> void:
+	refresh_hint_count()
 	var weights: Array[int] = [90,10,0]
 
 	if _prog_locs.is_empty():
@@ -58,8 +62,10 @@ func grant_hint() -> void:
 		itm = _prog_locs.pick_random()
 	else:
 		itm = _non_prog_locs.pick_random()
+	print("Hinting: ", itm.get_name())
 	Archipelago.conn.scout(itm.loc_id, 1, Callable())
-	Archipelago.conn.on_hint_update.connect(display_hint.bind(itm.loc_id), CONNECT_ONE_SHOT | CONNECT_REFERENCE_COUNTED)
+	Archipelago.conn._on_hint_update.connect(display_hint.bind(itm.loc_id), CONNECT_ONE_SHOT | CONNECT_REFERENCE_COUNTED)
+
 func display_hint(hints: Array[NetworkHint], loc: int) -> void:
 	for hint in hints:
 		if hint.item.loc_id == loc:
@@ -67,6 +73,7 @@ func display_hint(hints: Array[NetworkHint], loc: int) -> void:
 			output_label.text = s
 			#await PopupManager.popup_dlg(s, "Correct!", false)
 			return
+
 static func load_connection():
 	var conn_info_file: FileAccess = FileAccess.open("user://ap/connection.dat", FileAccess.READ)
 	if not conn_info_file: return
@@ -75,6 +82,7 @@ static func load_connection():
 	var slot = conn_info_file.get_line()
 	Archipelago.creds.update(ip, port, slot, "")
 	conn_info_file.close()
+
 static func save_connection(creds: APCredentials):
 	DirAccess.make_dir_recursive_absolute("user://ap/")
 	var conn_info_file: FileAccess = FileAccess.open("user://ap/connection.dat", FileAccess.WRITE)
@@ -83,3 +91,10 @@ static func save_connection(creds: APCredentials):
 	conn_info_file.store_line(creds.port)
 	conn_info_file.store_line(creds.slot)
 	conn_info_file.close()
+
+func on_connect(conn: ConnectionInfo, json: Dictionary) -> void:
+	conn.roomupdate.connect(refresh_hint_count.unbind(1))
+	conn._on_hint_update.connect(refresh_hint_count.unbind(1))
+	#conn.deathlink.connect(%Sudoku.deathlink_recv)
+	conn.all_scout_cached.connect(refresh_hint_count, CONNECT_ONE_SHOT)
+	conn.force_scout_all()

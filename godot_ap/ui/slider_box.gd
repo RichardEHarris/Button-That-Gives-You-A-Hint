@@ -21,11 +21,11 @@ func _ready():
 	row.reset_size()
 	custom_minimum_size = Vector2.ZERO
 	reset_size()
-	Archipelago.connected.connect(func(_conn, _json):
-		connect_btn.disabled = true
-		disconnect_btn.disabled = false
-		if Archipelago.AP_CONSOLE_CONNECTION_AUTO:
-			slide_to(false))
+	#Archipelago.connected.connect(func(_conn, _json):
+	#	connect_btn.disabled = true
+	#	disconnect_btn.disabled = false
+	#	if Archipelago.AP_CONSOLE_CONNECTION_AUTO:
+	#		slide_to(false))
 	Archipelago.disconnected.connect(func():
 		connect_btn.disabled = false
 		disconnect_btn.disabled = true

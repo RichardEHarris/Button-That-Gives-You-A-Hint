@@ -7,7 +7,7 @@
 @onready var console_margin: MarginContainer = console_container.margin
 @onready var console: BaseConsole = console_container.console
 @onready var typing_bar: TypingBar = console_container.typing_bar
-@onready var hint_button: MarginContainer = $Tabs/HintButton
+@onready var hint_button: MarginContainer = $"Tabs/Hint Button"
 
 @export var hide_console_tab := false :
 	set(val):

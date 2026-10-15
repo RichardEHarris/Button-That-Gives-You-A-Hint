@@ -8,7 +8,7 @@ func _ready():
 
 	Archipelago.AP_CLIENT_VERSION = Version.val(0,1,0) # GodotAP CommonClient version
 	AP.log(Archipelago.AP_CLIENT_VERSION)
-	Archipelago.set_tags(["TextOnly"])
+	Archipelago.set_tags(["HintGame"])
 	Archipelago.AP_ITEM_HANDLING = Archipelago.ItemHandling.ALL
 	Archipelago.creds.updated.connect(GodotAPMain.save_connection)
 	GodotAPMain.load_connection()
